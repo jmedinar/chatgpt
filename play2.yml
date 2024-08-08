@@ -1,0 +1,14 @@
+---
+- hosts: localhost
+  tasks:
+    - name: Query ChatGPT using the custom module
+      chatgpt_query:
+        api_key: "{{ openai_api_key }}"
+        prompt: "What is the capital of France?"
+        max_tokens: 10
+      register: result
+
+    - name: Print the response
+      debug:
+        msg: "{{ result.response.choices[0].text.strip() }}"
+

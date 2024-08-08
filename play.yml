@@ -1,0 +1,17 @@
+---
+- name: Use ChatGPT module
+  hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: Query ChatGPT
+      chatgpt_module:
+        query: "Explain the concept of Ansible modules."
+        api_key: "{{ lookup('env', 'OPENAI_API_KEY') }}"
+        model: "gpt-3.5-turbo"
+        max_tokens: 150
+      register: result
+
+    - name: Print ChatGPT response
+      debug:
+        msg: "{{ result.response }}"
+
