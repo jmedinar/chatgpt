@@ -2,6 +2,7 @@
 
 from ansible.module_utils.basic import AnsibleModule
 import requests
+import time
 
 def run_module():
     # Define module arguments
@@ -48,7 +49,7 @@ def run_module():
         "presence_penalty": presence_penalty
     }
 
-    url = "https://api.openai.com/v1/completions"
+    url = "https://api.openai.com/v1/chat/completions"
 
     try:
         response = requests.post(url, headers=headers, json=data)
@@ -59,6 +60,7 @@ def run_module():
         module.fail_json(msg=f"API request failed: {str(e)}")
 
 def main():
+    time.sleep(1)
     run_module()
 
 if __name__ == '__main__':
